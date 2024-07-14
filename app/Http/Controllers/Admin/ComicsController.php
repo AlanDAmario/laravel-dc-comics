@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comic;
 use Illuminate\Http\Request;
 
 class ComicsController extends Controller
@@ -12,7 +13,9 @@ class ComicsController extends Controller
      */
     public function index()
     {
-        //
+        //ANDIAMO A RICHIAMARE TUTTI I DATI GRAZIE ALL ACCESSO ILLIMITATO 
+        $comics = Comic::all();
+        return view('comics_books.index', compact('comics'));
     }
 
     /**
@@ -36,7 +39,11 @@ class ComicsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        $artists = json_decode($comic->artists); // Decodifica gli artisti
+
+        return view('comics_books.show', compact('comic', 'artists'));
     }
 
     /**

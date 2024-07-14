@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('series', 255);
             $table->string('sale_date', 50);
             $table->string('type', 100);
-            $table->json('artists'); //riga per memorizzare gli artisti come JSON
+            $table->text('artists'); //riga per memorizzare gli artisti come JSON
 
             $table->timestamps();
         });

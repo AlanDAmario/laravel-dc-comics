@@ -15,7 +15,7 @@ class ComicSeeder extends Seeder
     {
         $comics = config('comics');
         foreach ($comics as $comic_data) {
-            
+
             $comic = new Comic();
 
             $comic->title = $comic_data['title'];
@@ -25,7 +25,7 @@ class ComicSeeder extends Seeder
             $comic->series = $comic_data['series'];
             $comic->sale_date = $comic_data['sale_date'];
             $comic->type = $comic_data['type'];
-            $comic->artists = json_encode($comic_data['artists']); // Codifica l'array come JSON
+            $comic->artists = json_encode($comic_data['artists']); // Codifica gli artisti come JSON
 
             $comic->save();
         }

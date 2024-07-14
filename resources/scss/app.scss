@@ -1,2 +1,22 @@
 @import "~bootstrap/scss/bootstrap";
 
+.fs-title {
+    font-size: 7px;
+}
+
+.image-container {
+    width: 100%;
+    padding-bottom: 100%; /* Mantiene il contenitore quadrato */
+    position: relative;
+    overflow: hidden; /* Nasconde la parte inferiore dell'immagine */
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ritaglia l'immagine per coprire il contenitore */
+    object-position: 0% 2%; /* Mostra leggermente più in basso dell'immagine */
+}

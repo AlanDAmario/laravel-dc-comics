@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ComicsController;
 use App\Http\Controllers\Guest\PageController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+
+//ROTTE PER CONTROLLER RESOURCE 
+
+Route::resource('/comics', ComicsController::class);
