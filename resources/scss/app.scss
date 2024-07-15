@@ -21,3 +21,22 @@
     object-position: 0% 2%; /* Mostra leggermente più in basso dell'immagine */
 }
 
+.img-size{
+    width: 100%;
+    object-fit: cover;
+}
+
+.h-vw{
+    height: 50vh;
+}
+
+.bg-footer{
+    background-image: url('../img/dc4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50vh;
+}
+
+.bg-index{
+    background-image: url('../img/dc4.webp');
+}

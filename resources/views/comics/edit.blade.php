@@ -16,8 +16,10 @@
                             value="{{ $comic->sale_date }}">
                         <input type="text" class="form-control my-2" placeholder="Serie" name="series"
                             value="{{ $comic->series }}">
-                        <input type="text" class="form-control my-2" placeholder="Artista" name="artists[]" >
-                        <input type="text" class="form-control my-2" placeholder="Scrittore" name="writers[]" >
+                        <input type="text" class="form-control my-2" placeholder="Artista" name="artists[]"
+                            value="{{ implode(', ', json_decode($comic->artists, true)) }}">
+                        <input type="text" class="form-control my-2" placeholder="Scrittore" name="writers[]"
+                            value="{{ implode(', ', json_decode($comic->writers, true)) }}">
                         <input type="text" class="form-control my-2" placeholder="Prezzo" name="price"
                             value="{{ str_replace('$', '', $comic->price) }} ">
                         <textarea class="form-control" rows="7" name="description">{{ $comic->description }} </textarea>

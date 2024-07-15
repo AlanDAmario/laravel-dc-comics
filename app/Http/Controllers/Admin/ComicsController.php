@@ -35,16 +35,16 @@ class ComicsController extends Controller
 
         $comic = new Comic();
 
-        // $comic->title = $data['title'];
-        // $comic->description = $data['description'];
-        // $comic->thumb = $data['thumb'];
-        // $comic->price = $data['price'];
-        // $comic->type = $data['type'];
-        // $comic->series = $data['series'];
-        // $comic->sale_date = $data['sale_date'];
-        // $comic->artists = json_encode($data['artists']);
-        // $comic->writers = json_encode($data['writers']);
-        $comic->fill($data);
+         $comic->title = $data['title'];
+         $comic->description = $data['description'];
+         $comic->thumb = $data['thumb'];
+         $comic->price = $data['price'];
+         $comic->type = $data['type'];
+         $comic->series = $data['series'];
+         $comic->sale_date = $data['sale_date'];
+         $comic->artists = json_encode($data['artists']);
+         $comic->writers = json_encode($data['writers']);
+        
         $comic->save();
 
         // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
@@ -94,8 +94,11 @@ class ComicsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comic $comic)
     {
-        //
+        
+        $comic->delete();
+        // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
+        return redirect()->route('comics.index')->with('success', 'Comic deleted successfully');
     }
 }

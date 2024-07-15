@@ -43,15 +43,12 @@
                                 <a href="{{ route('comics.index') }}">
                                     <button type="button" class="btn btn-outline-info">Torna alla Home </button>
                                 </a>
-                                <form action="{{route('comics.destroy', $comic->id)}}" method="POST">
+                                
+                                <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('comics.index') }}">
-                                        <button type="button" class="btn btn-outline-danger">X</button>
-                                    </a>
+                                    <button type="submit" class="btn btn-outline-danger">X</button>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
