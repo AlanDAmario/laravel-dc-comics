@@ -24,4 +24,4 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 //ROTTE PER CONTROLLER RESOURCE 
 
-Route::resource('/comics', ComicsController::class);
+Route::resource('comics', ComicsController::class);

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="container-full bg-dark">
-        <div class="col-12 p-5">
+    <div class="container-full ">
+        <div class="col-12 p-5 bg-dark">
             <div class="card">
                 <div class="row">
                     <div class="col-md-4 p-3">
@@ -37,9 +37,20 @@
                                         preferito!!
                                     </button>
                                 </a>
-                                <a href="{{ route('home') }}">
+                                <a href="{{ route('comics.edit', $comic->id) }}">
+                                    <button type="button" class="btn btn-outline-info">Modifica il tuo fumetto</button>
+                                </a>
+                                <a href="{{ route('comics.index') }}">
                                     <button type="button" class="btn btn-outline-info">Torna alla Home </button>
                                 </a>
+                                <form action="{{route('comics.destroy', $comic->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('comics.index') }}">
+                                        <button type="button" class="btn btn-outline-danger">X</button>
+                                    </a>
+                                </form>
+
 
                             </div>
                         </div>

@@ -15,7 +15,7 @@ class ComicsController extends Controller
     {
         //ANDIAMO A RICHIAMARE TUTTI I DATI GRAZIE ALL ACCESSO ILLIMITATO 
         $comics = Comic::all();
-        return view('comics_books.index', compact('comics'));
+        return view('comics.index', compact('comics'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ComicsController extends Controller
      */
     public function create()
     {
-        return view('comics_books.create');
+        return view('comics.create');
     }
 
     /**
@@ -35,16 +35,16 @@ class ComicsController extends Controller
 
         $comic = new Comic();
 
-        $comic->title = $data['title'];
-        $comic->description = $data['description'];
-        $comic->thumb = $data['thumb'];
-        $comic->price = $data['price'];
-        $comic->type = $data['type'];
-        $comic->series = $data['series'];
-        $comic->sale_date = $data['sale_date'];
-        $comic->artists = json_encode($data['artists']);
-        $comic->writers = json_encode($data['writers']);
-
+        // $comic->title = $data['title'];
+        // $comic->description = $data['description'];
+        // $comic->thumb = $data['thumb'];
+        // $comic->price = $data['price'];
+        // $comic->type = $data['type'];
+        // $comic->series = $data['series'];
+        // $comic->sale_date = $data['sale_date'];
+        // $comic->artists = json_encode($data['artists']);
+        // $comic->writers = json_encode($data['writers']);
+        $comic->fill($data);
         $comic->save();
 
         // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
@@ -65,23 +65,30 @@ class ComicsController extends Controller
         $artists = json_decode($comic->artists); // Decodifica gli artisti
         $writers = json_decode($comic->writers); // Decodifica gli scrittori
 
-        return view('comics_books.show', compact('comic', 'artists', 'writers'));
+        return view('comics.show', compact('comic', 'artists', 'writers'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+
+        $artists = json_decode($comic->artists); // Decodifica gli artisti
+        $writers = json_decode($comic->writers); // Decodifica gli scrittori
+
+        return view('comics.edit', compact('comic', 'artists', 'writers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $data = $request->all();
+        $comic->update($data);
+        // Redireziona l'utente all pagina dei fumetti con un messaggio di successo
+        return redirect()->route('comics.show',$comic->id);
     }
 
     /**

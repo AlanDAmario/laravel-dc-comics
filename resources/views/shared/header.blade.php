@@ -1,1 +1,34 @@
-<h1>header</h1>
+<div class="container-fluid p-3">
+    <div class="row px-5">
+        <div class="col-3 flex-grow-1">
+            <a class="navbar-brand" href="{{route('comics.index')}}">
+                <img src= "{{ Vite::asset('resources/img/dclogo.png') }}" alt = "Logo" width="60" height="60">
+            </a>
+        </div>
+        <div class="col-5">
+            <nav class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{route('comics.index')}}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('comics.create')}}">Crea il tuo fumetto</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown link
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
