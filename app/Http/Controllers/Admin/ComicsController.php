@@ -23,7 +23,7 @@ class ComicsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics_books.create');
     }
 
     /**
@@ -31,19 +31,41 @@ class ComicsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $comic = new Comic();
+
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $comic->price = $data['price'];
+        $comic->type = $data['type'];
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->artists = json_encode($data['artists']);
+        $comic->writers = json_encode($data['writers']);
+
+        $comic->save();
+
+        // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
+        return redirect()->route('comics.index')->with('success', 'Comic added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+
+    //METODO PER CERCARE IL COMPONENTE TRAMITE ID
+    // public function show(string $id)
+    //METODO PER CERCARE IL COMPONENTE TRAMITE L ASSEGNAZIONE DEL MODEL
+    public function show(Comic $comic)
     {
-        $comic = Comic::findOrFail($id);
+        // $comic = Comic::findOrFail($id); METODO COLLEGATO ALLA RICERCA TRAMITE ID
 
         $artists = json_decode($comic->artists); // Decodifica gli artisti
+        $writers = json_decode($comic->writers); // Decodifica gli scrittori
 
-        return view('comics_books.show', compact('comic', 'artists'));
+        return view('comics_books.show', compact('comic', 'artists', 'writers'));
     }
 
     /**
