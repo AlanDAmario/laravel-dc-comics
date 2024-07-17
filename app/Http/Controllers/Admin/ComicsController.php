@@ -35,16 +35,16 @@ class ComicsController extends Controller
 
         $comic = new Comic();
 
-         $comic->title = $data['title'];
-         $comic->description = $data['description'];
-         $comic->thumb = $data['thumb'];
-         $comic->price = $data['price'];
-         $comic->type = $data['type'];
-         $comic->series = $data['series'];
-         $comic->sale_date = $data['sale_date'];
-         $comic->artists = json_encode($data['artists']);
-         $comic->writers = json_encode($data['writers']);
-        
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $comic->price = $data['price'];
+        $comic->type = $data['type'];
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->artists = json_encode($data['artists']);
+        $comic->writers = json_encode($data['writers']);
+
         $comic->save();
 
         // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
@@ -61,9 +61,13 @@ class ComicsController extends Controller
     public function show(Comic $comic)
     {
         // $comic = Comic::findOrFail($id); METODO COLLEGATO ALLA RICERCA TRAMITE ID
+        
+        // Decodifica gli artisti se esistono, altrimenti inizializza un array vuoto
+        $artists = $comic->artists ? json_decode($comic->artists) : [];
 
-        $artists = json_decode($comic->artists); // Decodifica gli artisti
-        $writers = json_decode($comic->writers); // Decodifica gli scrittori
+        // Decodifica gli scrittori se esistono, altrimenti inizializza un array vuoto
+        $writers = $comic->writers ? json_decode($comic->writers) : [];
+
 
         return view('comics.show', compact('comic', 'artists', 'writers'));
     }
@@ -86,9 +90,10 @@ class ComicsController extends Controller
     public function update(Request $request, Comic $comic)
     {
         $data = $request->all();
+        //UPDATE(DATA), FA SI CHE NON SERVA RISCRIVERE
         $comic->update($data);
         // Redireziona l'utente all pagina dei fumetti con un messaggio di successo
-        return redirect()->route('comics.show',$comic->id);
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
@@ -96,7 +101,7 @@ class ComicsController extends Controller
      */
     public function destroy(Comic $comic)
     {
-        
+
         $comic->delete();
         // Redireziona l'utente alla pagina dei fumetti con un messaggio di successo
         return redirect()->route('comics.index')->with('success', 'Comic deleted successfully');
